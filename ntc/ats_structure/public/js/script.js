@@ -1,0 +1,5 @@
+setTimeout(() => {
+    const alertDiv = document.getElementsByName("alert_container");
+    if (alertDiv[0] != undefined)
+        alertDiv[0].parentNode.removeChild(alertDiv[0]);
+}, 3000);

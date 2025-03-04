@@ -1,0 +1,186 @@
+body {
+    background-color: #f2f9f3;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #6c757d !important;
+    font-size: 14px !important;
+}
+
+table, th, td {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #6c757d !important;
+}
+
+.anchor-italic {
+    text-decoration: none;
+    font-weight: bold;
+    color: #065368;
+    font-style: italic;
+}
+
+.anchor-regular {
+    text-decoration: none;
+    color: #065368;
+}
+
+.footer-container {
+    padding: 30px;
+    background: linear-gradient(180deg, #1E1E1E 0%, #00171F 100%);
+    color: #c8c8c8;
+    width: 100%;
+}
+
+.text-white {
+    color : #FFFFFF;
+}
+
+.navbar {
+    background: rgba(255, 255, 255, 0.95) !important;
+    box-shadow: 5px 5px 5px #c8c8c8;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index : 888;
+}
+
+
+.text-lightbluegreen {
+    color: #6AC9CF
+}
+
+.text-darkbluegreen {
+    color: #065368;
+}
+
+.card-container {
+    background-color: #FFFFFF !important;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px #c8c8c8;
+}
+
+.card-container-no-shadow {
+    background-color: #FFFFFF !important;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.btn-primary {
+    background-color: #065368 !important;
+    border-color: #065368 !important;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.btn-primary:hover {
+    background-color: #0A4958 !important;
+}
+
+.body-contents-container {
+    height: 700px !important; 
+    display:block;
+}
+
+.vertical-border {
+    border-right : 1px solid #6c757d;
+}
+
+.job-card, .job-detail-card {
+    text-align : left;
+    border : 1px solid #D3D3D3;
+    border-radius : 10px;
+    background : #FFFFFF;
+    margin : 10px 20px 0;
+    padding : 10px;
+    width : 100%;    
+}
+
+.job-card:hover {
+    -webkit-box-shadow: 0 0 5px 2px #D3D3D3;
+    -moz-box-shadow: 0 0 5px 2px #D3D3D3;
+    box-shadow: 0 0 5px 2px #D3D3D3;
+}
+
+.job-card:focus {
+    border-color : #6c757d;
+}
+
+.job-tag {
+    background : #6AC9CF;
+    padding : 10px;
+    margin-bottom : 10px;
+    margin-right : 10px;
+    border-radius : 10px;
+    color : #FFFFFF;
+    font-weight : bold;
+}
+
+.profile-picture {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #065368;
+    float : right;
+}
+
+.message-frame {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height:400px;
+    border-top-right-radius: 10;
+    border-top-left-radius: 10;
+    background-color:#F5F5F5;
+    padding: 10px;
+    border: 1px solid #D3D3D3;
+}
+
+.message-bubble {
+    padding: 10px;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.sender-bubble {
+    background-color: #6AC9CF;
+    color: #00171F;
+    width: auto;
+    margin-left: 10px;
+}
+
+.receiver-bubble {
+    background-color: #6c757d;
+    color: #f2f9f3;
+    width: auto;
+    margin-right: 10px;
+}
+
+.font-10 {
+    font-size: 10px;
+}
+
+.message-list-button{
+    border: 0;
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #c8c8c8;
+    padding: 10px;
+    text-align: left;
+}
+
+.message-list-button:hover {
+    background-color: #c8c8c8;
+}
+
+.message-list-button:focus {
+    background-color: #6c757d;
+    color: #F5F5F5;
+}
+
+.alert-bubble {
+    z-index: 999;
+    position: fixed;
+    margin-left: 25%;
+}
