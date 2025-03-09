@@ -1,9 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\FileController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FileController;
+use App\Http\Controllers\JobsController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Jobs;
 
 Route::get('/', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'loginPost'])->name('login.post');
@@ -23,11 +25,17 @@ Route::group(['middleware' => 'auth'], function() {
         return view('messages');
     })->name("messages");
     
-    Route::get('/jobs', function () {
-        return "Jobs";
-    })->name('jobs');
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        
+        $id = auth()->user()->id;
+        $jobs = Jobs::where('creator_id', $id)->orderByDesc('created_at')->get();
+
+        $data = [
+            'id' => $id,
+            'jobs' => $jobs
+        ];
+
+        return view('dashboard')->with('data', $data);
     })->name('home');
 
     //profile related routes
@@ -63,17 +71,21 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::get('/download/cv', FileController::class)->middleware('auth')->name('resume.download');
 
-    Route::get('/jobs', function () {
-        return view('jobboard');
-    })->name('jobs');
+    //jobs related routes
+    Route::prefix('jobs')->group(function() {
+        //index 
+        Route::get('/{id}', [JobsController::class, 'show'])->name('jobs.index');
+        
+        //create/edit
+        Route::get('/listing/{id}/edit/{jobId?}', [JobsController::class, 'listing'])->name('jobs.edit.listing');    
+        Route::post('/listing/{id}', [JobsController::class, 'listingPost'])->name('jobs.edit.listing.post');
+        Route::put('/listing/{id}/{jobId?}', [JobsController::class, 'listingPost'])->name('jobs.edit.listing.post');
+        //view
+        Route::get('/listing/{id}/view/{jobId}', [JobsController::class, 'view'])->name('jobs.view.listing');
+    });
+
     Route::get('/jobs/applications', function () {
         return view('job_applications');
-    });
-    Route::get('/jobs/add', function () {
-        return view('joblisting_add');
-    });
-    Route::get('/jobs/view', function () {
-        return view('jobview');
     });
 
 });

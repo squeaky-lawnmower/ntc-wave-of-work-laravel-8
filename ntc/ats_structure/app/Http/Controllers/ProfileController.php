@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\UserAbout;
 use App\Models\UserSkill;
-use Illuminate\Http\Request;
 use App\Models\UserEducation;
 use App\Models\UserExperience;
+use App\Models\Jobs;
+
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -32,6 +34,7 @@ class ProfileController extends Controller
         $experiences = UserExperience::where('user_id', $id)->orderByDesc('end_year')->get();
         $education = UserEducation::where('user_id', $id)->orderByDesc('end_year')->get();
         $skills = UserSkill::where('user_id', $id)->get();
+        $jobs = Jobs::where('creator_id', $id)->orderByDesc('created_at')->get();
 
         if ($profile == null) {
             return redirect(route("home"))->with('error','Profile not found.');
@@ -43,7 +46,8 @@ class ProfileController extends Controller
             'about' => $about,
             'experiences' => $experiences,
             'education' => $education,
-            'skills' => $skills
+            'skills' => $skills,
+            'jobs' => $jobs
         ];
 
         return view("profile.index", ['id', $id])->with($data);

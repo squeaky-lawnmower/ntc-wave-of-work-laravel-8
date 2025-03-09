@@ -34,7 +34,7 @@
             </li>
             @auth
               <li class="nav-item">
-                <a class="nav-link" href="{{route('jobs')}}">Jobs</a>
+                <a class="nav-link" href="{{route('jobs.index', ['id' => auth()->user()->id])}}">Jobs</a>
               </li>
               <li class="nav-item">
                   <a class="nav-link" href="{{route('profile', ['id' => auth()->user()->id])}}">Profile</a>
