@@ -53,15 +53,15 @@ Route::group(['middleware' => 'auth'], function() {
         
         //experience section
         Route::get('/experience/{id}/edit', [ProfileController::class, 'experience'])->name('profile.edit.experience');
-        Route::post('/experience/{id}', [ProfileController::class, 'experiencePost'])->name('profile.edit.experience.post');
-        Route::put('/experience/{id}/{expId?}', [ProfileController::class, 'experiencePost'])->name('profile.edit.experience.post');
-        Route::delete('/experience/{id}/{expId}', [ProfileController::class, 'experienceDelete'])->name('profile.delete.experience.post');
+        Route::post('/experience/{id}', [ProfileController::class, 'experiencePost'])->name('profile.add.experience.post');
+        Route::put('/experience/{id}/update/{expId}', [ProfileController::class, 'experiencePost'])->name('profile.edit.experience.post');
+        Route::delete('/experience/{id}/delete/{expId}', [ProfileController::class, 'experienceDelete'])->name('profile.delete.experience.post');
         
         //education section
         Route::get('/education/{id}/edit', [ProfileController::class, 'education'])->name('profile.edit.education');
-        Route::post('/education/{id}', [ProfileController::class, 'educationPost'])->name('profile.edit.education.post');
-        Route::put('/education/{id}/{educId?}', [ProfileController::class, 'educationPost'])->name('profile.edit.education.post');
-        Route::delete('/education/{id}/{educId?}', [ProfileController::class, 'educationDelete'])->name('profile.delete.education.post');
+        Route::post('/education/{id}', [ProfileController::class, 'educationPost'])->name('profile.add.education.post');
+        Route::put('/education/{id}/update/{educId}', [ProfileController::class, 'educationPost'])->name('profile.edit.education.post');
+        Route::delete('/education/{id}/delete/{educId}', [ProfileController::class, 'educationDelete'])->name('profile.delete.education.post');
 
         //skill section
         Route::get('/skill/{id}/edit', [ProfileController::class, 'skill'])->name('profile.edit.skill');
@@ -78,8 +78,8 @@ Route::group(['middleware' => 'auth'], function() {
         
         //create/edit
         Route::get('/listing/{id}/edit/{jobId?}', [JobsController::class, 'listing'])->name('jobs.edit.listing');    
-        Route::post('/listing/{id}', [JobsController::class, 'listingPost'])->name('jobs.edit.listing.post');
-        Route::put('/listing/{id}/{jobId?}', [JobsController::class, 'listingPost'])->name('jobs.edit.listing.post');
+        Route::post('/listing/{id}', [JobsController::class, 'listingPost'])->name('jobs.add.listing.post');
+        Route::put('/listing/{id}/update/{jobId}', [JobsController::class, 'listingPost'])->name('jobs.edit.listing.post');
         //view
         Route::get('/listing/{id}/view/{jobId}', [JobsController::class, 'view'])->name('jobs.view.listing');
     });
