@@ -74,7 +74,15 @@ class ProfileController extends Controller
 
     function personalPost(Request $request, $id) {
 
-        $profile = User::findOrFail($id);  
+        if($id == null) {
+            $id = auth()->user()->id;
+        }
+
+        if(!Auth::check()) {
+            return redirect(route('login'));
+        }
+        
+        $profile = User::where('id', $id)->first();
         
         $request->validate([
             'firstname' => 'required',
