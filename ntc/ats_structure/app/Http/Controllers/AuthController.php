@@ -77,5 +77,44 @@ class AuthController extends Controller
         Auth::logout();
         return redirect(route('login'));
     }
+
+    function forgotpass() {
+        if(Auth::check()) {
+            return redirect(route('home'));
+        }
+        return view('forgotpass');
+    }
+
+    function resetpass() {
+        if(Auth::check()) {
+            return redirect(route('home'));
+        }
+        return view('resetpass');
+    }
+
+    
+    function resetpassPost(Request $request, $id) {
+        
+        $request->validate([
+            'new_password' => 'required',
+            'retype_password' => 'required',
+        ]);
+
+        if ($request->new_password != $request->retype_password) 
+        {
+            return redirect()->back()->with('error','Password mismatch');
+        }
+
+        $profile = User::where('id', $id)->first();
+        $profile->password = Hash::make($request->new_password);        
+        $profile->save();
+        
+        if (!$profile) {
+            return redirect()->back()->with('error','Unable to reset password.');
+        }
+        
+        return redirect(route('login'))->with('success', 'Password reset successful, login to access the app');
+    }    
+
 }
 

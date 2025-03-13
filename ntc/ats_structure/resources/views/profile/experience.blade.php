@@ -15,7 +15,7 @@
         </div>
         <div class="row">
             <div class="col-12" style="background: #FAFAFA;" class="mt-5 mb-5">            
-                <form action="{{route('profile.edit.experience.post', ['id' => auth()->user()->id])}}" method="POST">
+                <form action="{{route('profile.add.experience.post', ['id' => auth()->user()->id])}}" method="POST">
                     @csrf
                     <div class="row mt-2">
                         <div class="col-12  col-sm-12 col-md-12">

@@ -25,13 +25,22 @@
             </div>
         </div>
         @php $data['id'] = auth()->user()->id; @endphp
+        @if(!empty($job->id)) 
+            @php
+                $routeName = 'jobs.edit.listing.post';
+                $methodType = 'PUT';
+            @endphp
+        @else
+            @php
+                $routeName = 'jobs.add.listing.post';
+                $methodType = 'POST';
+            @endphp
+        @endif
         
         <div class="row">
             <div class="col-12" style="background: #FAFAFA;" class="border-r rounded-r-lg">            
-                <form action="{{route('jobs.edit.listing.post', $data)}}" method="POST">
-                    @if(!empty($job->id)) 
-                        @method('PUT')
-                    @endif
+                <form action="{{route($routeName, $data)}}" method="POST">
+                    @method($methodType)
                     @csrf
                     <div class="row mt-3">
                         <div class="col-4 col-sm-4 col-md-4">

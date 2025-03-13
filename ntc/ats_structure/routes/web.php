@@ -6,16 +6,22 @@ use App\Http\Controllers\FileController;
 use App\Http\Controllers\JobsController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Jobs;
+use App\Http\Controllers\MailController;
 
 Route::get('/', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'loginPost'])->name('login.post');
 Route::get('/registration', [AuthController::class, 'registration'])->name('registration');
 Route::post('/registration', [AuthController::class, 'registrationPost'])->name('registration.post');
-Route::get('/forgotpass', function () {
-    return "Forgot";
-})->name('forgotpass');
+Route::post('/sendMail', [MailController::class, 'sendMail'])->name('sendMail');
 Route::get('/support', function () {
     return view('support');
+});
+
+    //password related routes
+Route::prefix('password')->group(function() {
+    Route::get('/forgot', [AuthController::class, 'forgotpass'])->name('forgotpass');
+    Route::get('/reset/{id}', [AuthController::class, 'resetpass'])->name('resetpass');
+    Route::post('/reset/{id}', [AuthController::class, 'resetpassPost'])->name('password.reset.post');
 });
 
 Route::group(['middleware' => 'auth'], function() {

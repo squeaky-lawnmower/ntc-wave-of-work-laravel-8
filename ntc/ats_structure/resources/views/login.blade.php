@@ -25,7 +25,7 @@
                 @endif
             </div>
             <div class="col-12  col-sm-12 col-md-12 mt-2 mb-10 text-end">
-                <p><a class="anchor-italic" href="/forgotpass">Forgot Password?</a></p>
+                <p><a class="anchor-italic" href="{{ route('forgotpass') }}">Forgot Password?</a></p>
             </div>
 
             <button type="submit" class="btn btn-primary full-width">Log In</button>
