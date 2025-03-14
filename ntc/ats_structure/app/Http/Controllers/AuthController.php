@@ -93,7 +93,7 @@ class AuthController extends Controller
     }
 
     
-    function resetpassPost(Request $request, $id) {
+    function resetpassPost(Request $request, $id = null) {
         
         $request->validate([
             'new_password' => 'required',

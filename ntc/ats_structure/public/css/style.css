@@ -104,6 +104,7 @@ table, th, td {
 
 .job-card:focus {
     border-color : #6c757d;
+    background-color: #F5F5F5;
 }
 
 .job-tag {

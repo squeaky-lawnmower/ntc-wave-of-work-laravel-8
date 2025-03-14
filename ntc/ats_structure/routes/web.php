@@ -20,8 +20,8 @@ Route::get('/support', function () {
     //password related routes
 Route::prefix('password')->group(function() {
     Route::get('/forgot', [AuthController::class, 'forgotpass'])->name('forgotpass');
-    Route::get('/reset/{id}', [AuthController::class, 'resetpass'])->name('resetpass');
-    Route::post('/reset/{id}', [AuthController::class, 'resetpassPost'])->name('password.reset.post');
+    Route::get('/reset', [AuthController::class, 'resetpass'])->name('resetpass');
+    Route::post('/reset/{id}/send', [AuthController::class, 'resetpassPost'])->name('password.reset.post');
 });
 
 Route::group(['middleware' => 'auth'], function() {
@@ -88,6 +88,8 @@ Route::group(['middleware' => 'auth'], function() {
         Route::put('/listing/{id}/update/{jobId}', [JobsController::class, 'listingPost'])->name('jobs.edit.listing.post');
         //view
         Route::get('/listing/{id}/view/{jobId}', [JobsController::class, 'view'])->name('jobs.view.listing');
+        Route::get('/listing/{jobId}/details', [JobsController::class, 'details'])->name('jobs.details.listing');
+        Route::get('/listing/{id}/bubble', [JobsController::class, 'bubble'])->name('jobs.bubble.listing');
     });
 
     Route::get('/jobs/applications', function () {

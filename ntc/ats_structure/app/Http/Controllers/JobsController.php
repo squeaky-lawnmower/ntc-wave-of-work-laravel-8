@@ -45,13 +45,37 @@ class JobsController extends Controller
         }
 
         $job = Jobs::where('id', $jobId)->first();
+        $creator = User::where('id', $job->creator_id)->first();
 
         $data = [
-            'job' => $job
+            'job' => $job,
+            'creator' => $creator
         ];
 
         return view("jobs.listing.view", ['id'=> $id, 'jobId' => $jobId])->with($data);
     }
+
+    
+    function details($jobId) {
+        if($jobId == null) {
+            return redirect(route("home"))->with('error','Unable to view job details.');
+        }
+
+        if(!Auth::check()) {
+            return redirect(route('login'));
+        }
+
+        $job = Jobs::where('id', $jobId)->first();
+        $creator = User::where('id', $job->creator_id)->first();
+
+        $data = [
+            'job' => $job,
+            'creator' => $creator
+        ];
+
+        return view("jobs.listing.viewPlain", ['id'=> auth()->user()->id, 'jobId' => $jobId])->with($data);
+    }
+
 
     function listing($id = null, $jobId = null) {
         
@@ -121,6 +145,25 @@ class JobsController extends Controller
         }
 
         return redirect(route('jobs.index', ['id'=> $id]))->with('success', $message.' Successfully'); 
+    }
+
+    function bubble($id) {
+        if($id == null || $id != auth()->user()->id) {
+            $id = auth()->user()->id;
+            return redirect(route("home"))->with('error','Access Denied.');
+        }
+
+        if(!Auth::check()) {
+            return redirect(route('login'));
+        }
+
+        $jobs = Jobs::with('creator')->get();
+        
+        $data = [
+            'jobs' => $jobs
+        ];
+
+        return view("jobs.listing.bubbles")->with($data);
     }
 
 }

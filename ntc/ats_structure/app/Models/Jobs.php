@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Jobs extends Model
@@ -29,4 +31,9 @@ class Jobs extends Model
         'created_at',
         'updated_at'
     ];
+
+    public function creator() : BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }
