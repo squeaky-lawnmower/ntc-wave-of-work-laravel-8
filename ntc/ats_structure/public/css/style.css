@@ -22,6 +22,10 @@ table, th, td {
     color: #065368;
 }
 
+.anchor-regular:hover {
+    text-decoration: underline;
+}
+
 .footer-container {
     padding: 30px;
     background: linear-gradient(180deg, #1E1E1E 0%, #00171F 100%);

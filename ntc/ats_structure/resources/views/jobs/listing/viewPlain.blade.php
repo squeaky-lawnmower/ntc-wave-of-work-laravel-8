@@ -20,15 +20,17 @@
         <div class="row"  height=100%>
             <div class="col-sm-8 col-md-8">
                 <h5 class="text-darkbluegreen">{{$job->job_title}} ({{$job->job_code}})</h5>
-                <p>
-                    {{ucwords($creator->company)}}<br />
-                </p>
+                <a href="{{ route('profile', ['id' => $creator->id])}}" class="anchor-regular" target="_blank">
+                    <p>
+                        {{ucwords($creator->company)}}<br />
+                    </p>
+                </a>
                 <p><span class="job-tag mb-4">{{ str_replace('_', '-', ucwords($job->contract_type))}}</span></p>
             </div>
             <div class="col-sm-4 col-md-4 text-end align-middle">
                 <p>
                     @if('jobseeker' == auth()->user()->account_type) 
-                        <a class="btn btn-primary">Apply Now</a>
+                        <a class="btn btn-primary" href="{{ route('jobs.save.applications', ['jobId'=> $job->id]) }}" target="_blank">Apply Now</a>
                     @else
                         <a class="btn btn-primary" href="{{ route('jobs.edit.listing', ['id' => auth()->user()->id , 'jobId'=> $job->id]) }}">Edit</a>
                     @endif

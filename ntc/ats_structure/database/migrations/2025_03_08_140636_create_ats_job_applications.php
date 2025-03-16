@@ -19,9 +19,9 @@ class CreateAtsJobApplications extends Migration
             $table->foreign('user_id')->references('id')->on('ats_user');
             $table->unsignedBigInteger('job_id');
             $table->foreign('job_id')->references('id')->on('ats_jobs');
-            $table->enum('status', ['accepted', 'declined', 'pending']);
+            $table->enum('status', ['accepted', 'declined', 'pending', 'withdrawn']);
             $table->date('application_start_date');
-            $table->date('application_end_date');
+            $table->date('application_end_date')->nullable();
             $table->unsignedBigInteger('hired_by');
             $table->foreign('hired_by')->references('id')->on('ats_user');
             $table->timestamps();

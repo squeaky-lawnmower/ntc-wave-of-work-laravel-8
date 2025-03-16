@@ -18,9 +18,11 @@
                 @endforeach
             </div>
         </div>
-        <div class="col-1 col-sm-1 col-md-1 text-end d-flex flex-column justify-content-center">
-            <h3><a href="{{ route('jobs.index', ['id' => $job->creator_id])}}" class="anchor-regular" title="See All Jobs"><i class="fa fa-angle-right">&nbsp;&nbsp;</i></a></h3>
-        </div>
+        @if(true == $canEditProfile)
+            <div class="col-1 col-sm-1 col-md-1 text-end d-flex flex-column justify-content-center">
+                <h3><a href="{{ route('jobs.index', ['id' => $job->creator_id])}}" class="anchor-regular" title="See All Jobs"><i class="fa fa-angle-right">&nbsp;&nbsp;</i></a></h3>
+            </div>
+        @endif
     </div>
 @endif
 <div class="mt-8"><h3>&nbsp;</h3></div>

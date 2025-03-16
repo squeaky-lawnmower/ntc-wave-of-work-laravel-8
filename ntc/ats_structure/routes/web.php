@@ -1,12 +1,13 @@
 <?php
 
+use App\Models\Jobs;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\JobsController;
-use App\Http\Controllers\ProfileController;
-use App\Models\Jobs;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\JobApplicationsController;
 
 Route::get('/', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'loginPost'])->name('login.post');
@@ -90,10 +91,10 @@ Route::group(['middleware' => 'auth'], function() {
         Route::get('/listing/{id}/view/{jobId}', [JobsController::class, 'view'])->name('jobs.view.listing');
         Route::get('/listing/{jobId}/details', [JobsController::class, 'details'])->name('jobs.details.listing');
         Route::get('/listing/{id}/bubble', [JobsController::class, 'bubble'])->name('jobs.bubble.listing');
-    });
-
-    Route::get('/jobs/applications', function () {
-        return view('job_applications');
+        //applications
+        Route::get('/applications/{id}', [JobApplicationsController::class, 'show'])->name('jobs.index.applications');
+        Route::get('/applications/{jobId}/apply', [JobApplicationsController::class, 'save'])->name('jobs.save.applications');
+        Route::post('/applications/{jobId}/save', [JobApplicationsController::class, 'savePost'])->name('jobs.save.applications.post');
     });
 
 });

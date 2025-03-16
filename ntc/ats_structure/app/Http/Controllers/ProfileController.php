@@ -21,6 +21,11 @@ class ProfileController extends Controller
 
     function show($id = null) {
         
+        $canEditProfile = false;
+        if($id == auth()->user()->id) {
+            $canEditProfile = true;
+        }
+
         if($id == null) {
             $id = auth()->user()->id;
         }
@@ -47,7 +52,8 @@ class ProfileController extends Controller
             'experiences' => $experiences,
             'education' => $education,
             'skills' => $skills,
-            'jobs' => $jobs
+            'jobs' => $jobs,
+            'canEditProfile' => $canEditProfile
         ];
 
         return view("profile.index", ['id', $id])->with($data);
@@ -106,6 +112,8 @@ class ProfileController extends Controller
         
 
         $profile->save();
+
+        request()->headers->get('referer');
 
         return redirect(route('profile', ['id'=> $id]))->with('success', 'Update Successful');        
         

@@ -3,10 +3,12 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Models\JobApplications;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class Jobs extends Model
 {
@@ -35,5 +37,10 @@ class Jobs extends Model
     public function creator() : BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function jobApplications() : HasManyThrough
+    {
+        return $this->hasManyThrough(JobApplications::class);
     }
 }

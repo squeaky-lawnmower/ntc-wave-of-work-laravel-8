@@ -24,12 +24,10 @@
                               $iframeRoute = "/jobs/listing/".$job->id."/details";
                             @endphp
                             <button class="btn job-card" onclick="showJobDetails('{{ $iframeRoute }}')">
-                                <h5 class="text-darkbluegreen">{{ ucwords($job->job_title) }}<br />({{ ucwords($job->job_code) }})</h5>
-                                <a href="{{ route('profile', ['id' => $job->creator->id])}}" class="anchor-regular" target="_blank">
-                                  <p>
-                                    @php echo ucwords($job->creator->company); @endphp<br />
-                                  </p>
-                                </a>
+                                <h5 class="text-darkbluegreen">{{ ucwords($job->job_title) }} ({{ ucwords($job->job_code) }})</h5>
+                                <p>
+                                  @php echo ucwords($job->creator->company); @endphp<br />
+                                </p>
                                 <p><span class="job-tag mb-4">{{ str_replace('_', '-', ucwords($job->contract_type))}}</span></p>
                             </button>
                     </div>
