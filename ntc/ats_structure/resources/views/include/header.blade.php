@@ -1,13 +1,19 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-      <div class="col-sm-4 col-md-4 col-4">
+      <div class="col-sm-5 col-md-5 col-5">
         <img src="{{ asset('images/logo.png') }}" alt="NTC Logo" height="50px" width="auto" class="me-5">
         <!--a class="navbar-brand" href="#">{{config('app.name')}}</a-->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
+        @auth
+          Logged-in as, {{ auth()->user()->firstname}} {{ auth()->user()->lastname }}
+          @if (auth()->user()->company && 'jobseeker' != auth()->user()->account_type )
+            ({{auth()->user()->company}})
+          @endif
+        @endauth
       </div>
-      <div class="col-4 col-sm-4 col-md-4 me-auto ms-auto ">
+      <div class="col-3 col-sm-3 col-md-3 me-auto ms-auto ">
         @auth
           <form class="col-md-12 text-center me-auto ms-auto" role="search">
             <div class="input-group">
@@ -34,13 +40,21 @@
             </li>
             @auth
               <li class="nav-item">
-                <a class="nav-link" href="{{route('jobs.index', ['id' => auth()->user()->id])}}">Jobs</a>
+                
+                @php
+                  if ('jobseeker' == auth()->user()->account_type)  {
+                    $routeName = 'jobs.index.applications';
+                  } else {
+                    $routeName = 'jobs.index';
+                  }
+                @endphp
+                <a class="nav-link" href="{{route($routeName, ['id' => auth()->user()->id])}}">Jobs</a>
               </li>
               <li class="nav-item">
                   <a class="nav-link" href="{{route('profile', ['id' => auth()->user()->id])}}">Profile</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{route('messages')}}">Messages</a>
+                <a class="nav-link" href="{{route('messages', ['id' => auth()->user()->id])}}">Messages</a>
             </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{route('logout')}}">Logout</a>

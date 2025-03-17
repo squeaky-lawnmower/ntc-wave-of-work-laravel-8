@@ -37,7 +37,19 @@
                                         <td scope="row">{{$job->jobDetails->job_code}}</td>
                                         <td><a href="#" class="anchor-regular">{{strtoupper($job->jobDetails->job_title)}}</a></td>
                                         <td><span class='fw-bold text-success'>{{strtoupper($job->status)}}</span></td>
-                                        <td><a class='btn btn-primary' href="{{ route('jobs.edit.listing', ['id' => auth()->user()->id , 'jobId'=> $job->id]) }}"><i class="fa fa-pencil">&nbsp;&nbsp;</i>Withdraw</a></td>
+                                        <td>
+                                            <form action="{{route('jobs.update.applications.post', ['jobApplicationId' => $job->id])}}" method="POST">
+                                                @method('PUT')
+                                                @csrf
+                                           
+                                                @if($job->status == "pending")
+                                                        <x-form.input type="hidden" name="status" value="withdrawn" />
+                                                        <button class="btn btn-danger"><i class="fa fa-arrow-circle-o-left">&nbsp;&nbsp;</i>Withdraw</button>
+                                                    
+                                                @endif
+                                            <a class='btn btn-primary' href="{{ route('jobs.view.listing', ['id' => auth()->user()->id , 'jobId'=> $job->job_id]) }}" target="_blank"><i class="fa fa-eye">&nbsp;&nbsp;</i>View</a>
+                                        </form>
+                                        </td>
                                     </tr>
                                     @endforeach
                                 @endif

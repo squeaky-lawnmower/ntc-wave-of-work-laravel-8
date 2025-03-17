@@ -40,7 +40,15 @@
                                         <td scope="row">{{$job->job_code}}</td>
                                         <td><a href="#" class="anchor-regular">{{$job->job_title}}</a></td>
                                         <td><span class='fw-bold text-success'>{{strtoupper($job->status)}}</span></td>
-                                        <td><a class='btn btn-primary' href="{{ route('jobs.edit.listing', ['id' => auth()->user()->id , 'jobId'=> $job->id]) }}"><i class="fa fa-pencil">&nbsp;&nbsp;</i>Edit</a></td>
+                                        <td>
+                                            <a class='btn btn-success' href="{{ route('jobs.edit.listing', ['id' => auth()->user()->id , 'jobId'=> $job->id]) }}">
+                                                <i class="fa fa-pencil">&nbsp;&nbsp;</i>Edit
+                                            </a>
+                                        
+                                            <a class="btn btn-primary" href="{{route('jobs.view.listing', ['id' => auth()->user()->id, 'jobId' => $job->id ])}}">
+                                                <i class="fa fa-eye">&nbsp;&nbsp;</i>View Details
+                                            </a>
+                                        </td>
                                     </tr>
                                     @endforeach
                                 @endif

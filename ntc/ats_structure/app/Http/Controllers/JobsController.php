@@ -6,6 +6,7 @@ use App\Models\Jobs;
 use App\Models\User;
 
 use Illuminate\Http\Request;
+use App\Models\JobApplications;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -46,10 +47,28 @@ class JobsController extends Controller
 
         $job = Jobs::where('id', $jobId)->first();
         $creator = User::where('id', $job->creator_id)->first();
+        $job_applications = JobApplications::with('applicants')->where('job_id', $jobId)->get();
+
+        $condition = [
+            'job_id' => $jobId,
+            'user_id' => $id
+        ];
+        $hasApplied = JobApplications::with('applicants')->where($condition)->first();
+
+        $canEdit = ($job->creator_id == auth()->user()->id && 'draft' == $job->status) ? true : false;
+        $canViewApplicants = ($job->creator_id == auth()->user()->id) ? true : false;
+        $canApply = ($job->creator_id != auth()->user()->id 
+                    && 'jobseeker' == auth()->user()->account_type
+                    && !$hasApplied) ? true : false;
 
         $data = [
             'job' => $job,
-            'creator' => $creator
+            'creator' => $creator,
+            'job_applications' => $job_applications,
+            'canEdit' => $canEdit,
+            'canApply' => $canApply,
+            'canViewApplicants' => $canViewApplicants,
+            'hasApplied' => $hasApplied
         ];
 
         return view("jobs.listing.view", ['id'=> $id, 'jobId' => $jobId])->with($data);
@@ -68,9 +87,23 @@ class JobsController extends Controller
         $job = Jobs::where('id', $jobId)->first();
         $creator = User::where('id', $job->creator_id)->first();
 
+        $condition = [
+            'job_id' => $jobId,
+            'user_id' => auth()->user()->id
+        ];
+        $hasApplied = JobApplications::with('applicants')->where($condition)->first();
+
+        $canEdit = ($job->creator_id == auth()->user()->id && 'draft' == $job->status) ? true : false;
+        $canApply = ($job->creator_id != auth()->user()->id 
+                    && 'jobseeker' == auth()->user()->account_type
+                    && !$hasApplied) ? true : false;
+
         $data = [
             'job' => $job,
-            'creator' => $creator
+            'creator' => $creator,
+            'canEdit' => $canEdit,
+            'canApply' => $canApply,
+            'hasApplied' => $hasApplied
         ];
 
         return view("jobs.listing.viewPlain", ['id'=> auth()->user()->id, 'jobId' => $jobId])->with($data);
@@ -157,7 +190,10 @@ class JobsController extends Controller
             return redirect(route('login'));
         }
 
-        $jobs = Jobs::with('creator')->get();
+        $condition = [
+            'status' => 'open'
+        ];
+        $jobs = Jobs::with('creator')->where($condition)->orderByDesc('created_at')->get();
         
         $data = [
             'jobs' => $jobs

@@ -5,8 +5,24 @@ setTimeout(() => {
 }, 3000);
 
 function showJobDetails(iframeRoute) {
-    console.log(iframeRoute);
-
     var ifrm = parent.document.querySelector("[name=frame_job_details]");
     ifrm.src = iframeRoute;
+}
+
+function showMessageConvo(iframeRoute, messageId) {
+    var message_id = parent.document.querySelector("[name=message_id]");
+    message_id.value = messageId;
+    var ifrm = parent.document.querySelector("[name=frame_message_convo]");
+    ifrm.src = iframeRoute;
+}
+
+function changeApplicationStatus(status) {
+    document.getElementsByName("status").value = status;
+    document.submit();
+}
+
+function selectFirstMessage() {
+    var firstEntry = document.getElementsByClassName("message-list-button")[0];
+    firstEntry.click();
+    firstEntry.focus();
 }

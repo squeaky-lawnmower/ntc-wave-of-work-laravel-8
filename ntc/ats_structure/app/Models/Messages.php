@@ -2,17 +2,17 @@
 
 namespace App\Models;
 
-use App\Models\Jobs;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class JobApplications extends Model
+class Messages extends Model
 {
     use HasFactory, Notifiable;
 
-    protected $table = 'ats_job_applications';
+    protected $table = 'ats_messages';
 
     /**
      * The attributes that are mass assignable.
@@ -20,23 +20,19 @@ class JobApplications extends Model
      * @var list<string>
      */
     protected $fillable = [
-        'user_id',
-        'job_id',
-        'status',
-        'application_start_date',
-        'application_end_date',
-        'hired_by',
+        'original_sender_id',
+        'original_receiver_id',
         'created_at',
         'updated_at'
     ];
 
-    public function jobDetails() : HasOne
+    public function sender() : HasOne
     {
-        return $this->hasOne(Jobs::class, 'id', 'job_id');
+        return $this->hasOne(User::class, 'id', 'original_sender_id');
     }
-    
-    public function applicants() : HasOne
+
+    public function receiver() : HasOne
     {
-        return $this->hasOne(User::class, 'id', 'user_id');
+        return $this->hasOne(User::class, 'id', 'original_receiver_id');
     }
 }

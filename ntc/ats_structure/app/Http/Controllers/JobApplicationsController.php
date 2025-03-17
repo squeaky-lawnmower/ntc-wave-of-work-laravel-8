@@ -101,4 +101,26 @@ class JobApplicationsController extends Controller
         return redirect(route('jobs.index.applications', ['id'=> $id]))->with('success', $message.' Successfully');     
     }
 
+    function updatePost( Request $request, $jobApplicationId ) {
+        
+        
+        $id = auth()->user()->id;
+ 
+        $job_application = JobApplications::where('id', $jobApplicationId)->first();
+
+        $message = "";
+        if ($job_application != null) {
+            $message = ucfirst($request->status);
+            $job_application->status = $request->status;
+            $job_application->application_end_date = date("Y-m-d");;
+            $job_application->hired_by = auth()->user()->id;
+            $job_application->save();    
+        } 
+        if ('withdrawn' == $request->status) {
+            $routeName = 'jobs.index.applications';
+        } else {
+            $routeName = 'jobs.index';
+        }
+        return redirect(route($routeName, ['id'=> $id]))->with('success', $message.' Successfully');     
+    }
 }

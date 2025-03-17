@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-12 text-center mt-3">
             <div>
-                <h6><a href="/jobs/applications" class="anchor-regular">View My Applications</a></h6>
+                <h6><a href="{{ route('jobs.index.applications', ['id' => auth()->user()->id])}}" class="anchor-regular">View My Applications</a></h6>
             </div>
         </div>
     </div>

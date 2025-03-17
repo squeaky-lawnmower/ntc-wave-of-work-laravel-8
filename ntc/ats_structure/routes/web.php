@@ -7,6 +7,7 @@ use App\Http\Controllers\FileController;
 use App\Http\Controllers\JobsController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\MessagesController;
 use App\Http\Controllers\JobApplicationsController;
 
 Route::get('/', [AuthController::class, 'login'])->name('login');
@@ -28,10 +29,15 @@ Route::prefix('password')->group(function() {
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     
-    Route::get('/messages', function () {
-        return view('messages');
-    })->name("messages");
-    
+    //profile related routes
+    Route::prefix('messages')->group(function() {
+        Route::get('/{id}', [MessagesController::class, 'show'])->name('messages');
+        Route::get('/{id}/list', [MessagesController::class, 'list'])->name('messages.list');
+        Route::get('/{id}/exchange', [MessagesController::class, 'exchange'])->name('messages.exchange');
+        Route::post('/{id}/send', [MessagesController::class, 'send'])->name('messages.send');
+        Route::post('/{id}/start', [MessagesController::class, 'start'])->name('messages.start');
+    });
+
     Route::get('/dashboard', function () {
         
         $id = auth()->user()->id;
@@ -88,13 +94,14 @@ Route::group(['middleware' => 'auth'], function() {
         Route::post('/listing/{id}', [JobsController::class, 'listingPost'])->name('jobs.add.listing.post');
         Route::put('/listing/{id}/update/{jobId}', [JobsController::class, 'listingPost'])->name('jobs.edit.listing.post');
         //view
-        Route::get('/listing/{id}/view/{jobId}', [JobsController::class, 'view'])->name('jobs.view.listing');
+        Route::get('/listing/{id}/view/{jobId?}', [JobsController::class, 'view'])->name('jobs.view.listing');
         Route::get('/listing/{jobId}/details', [JobsController::class, 'details'])->name('jobs.details.listing');
         Route::get('/listing/{id}/bubble', [JobsController::class, 'bubble'])->name('jobs.bubble.listing');
         //applications
         Route::get('/applications/{id}', [JobApplicationsController::class, 'show'])->name('jobs.index.applications');
         Route::get('/applications/{jobId}/apply', [JobApplicationsController::class, 'save'])->name('jobs.save.applications');
         Route::post('/applications/{jobId}/save', [JobApplicationsController::class, 'savePost'])->name('jobs.save.applications.post');
+        Route::put('/applications/{jobApplicationId}/update', [JobApplicationsController::class, 'updatePost'])->name('jobs.update.applications.post');
     });
 
 });

@@ -29,10 +29,10 @@
             </div>
             <div class="col-sm-4 col-md-4 text-end align-middle">
                 <p>
-                    @if('jobseeker' == auth()->user()->account_type) 
+                    @if($canApply) 
                         <a class="btn btn-primary" href="{{ route('jobs.save.applications', ['jobId'=> $job->id]) }}" target="_blank">Apply Now</a>
-                    @else
-                        <a class="btn btn-primary" href="{{ route('jobs.edit.listing', ['id' => auth()->user()->id , 'jobId'=> $job->id]) }}">Edit</a>
+                    @elseif($hasApplied)
+                        <a class="btn btn-dark" >Already Applied</a>
                     @endif
                 </p>
             </div>
