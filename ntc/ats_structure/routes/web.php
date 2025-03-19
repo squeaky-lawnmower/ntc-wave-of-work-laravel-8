@@ -12,11 +12,17 @@ use App\Http\Controllers\JobApplicationsController;
 
 Route::get('/', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'loginPost'])->name('login.post');
-Route::get('/registration', [AuthController::class, 'registration'])->name('registration');
-Route::post('/registration', [AuthController::class, 'registrationPost'])->name('registration.post');
-Route::post('/sendMail', [MailController::class, 'sendMail'])->name('sendMail');
+Route::post('/sendMail/{email_type?}/{email?}', [MailController::class, 'sendMail'])->name('sendMail');
 Route::get('/support', function () {
     return view('support');
+});
+
+//registration related routes
+Route::prefix('registration')->group(function() {
+    Route::get('/', [AuthController::class, 'registration'])->name('registration');
+    Route::get('/{account_type}/signup', [AuthController::class, 'signup'])->name('signup');
+    Route::post('/{account_type}/save', [AuthController::class, 'registrationPost'])->name('registration.post');
+    Route::get('/{id}/activation', [AuthController::class, 'activation'])->name('activation');
 });
 
     //password related routes

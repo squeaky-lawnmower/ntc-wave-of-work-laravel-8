@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use DateTime;
 use App\Models\User;
 use App\Models\UserAbout;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -22,7 +24,15 @@ class AuthController extends Controller
         if(Auth::check()) {
             return redirect(route('home'));
         }
-        return view('registration');
+        return view('registration.index');
+    }
+
+    function signup($accountType) {
+        if(Auth::check()) {
+            return redirect(route('home'));
+        }
+        $data = ['account_type' => $accountType];
+        return view('registration.signup')->with($data);
     }
 
     function loginPost(Request $request) {
@@ -33,6 +43,14 @@ class AuthController extends Controller
 
         $credentials = $request->only('email', 'password');
         
+        $user = User::where('email', $request->email)->first();
+
+        if(!is_null($user) && is_null($user->email_verified_at)) {
+            return redirect(route('login'))->with('error', 'Please activate your account using the verification link sent to your email.');
+        } else if (is_null($user)) {
+            return redirect(route('login'))->with('error','Login details are not valid');
+        }
+
         if(Auth::attempt($credentials)) {
             return redirect()->intended('/dashboard');
         }
@@ -40,7 +58,7 @@ class AuthController extends Controller
         return redirect(route('login'))->with('error','Login details are not valid');
     }
 
-    function registrationPost(Request $request) {
+    function registrationPost(Request $request, $accountType) {
         $request->validate([
             'firstname' => 'required',
             'lastname' => 'required',
@@ -49,6 +67,10 @@ class AuthController extends Controller
             'password_retype' => 'required',
             'account_type' => 'required',
         ]);
+
+        if('employer' == $accountType) {
+            $request->validate(['company' => 'required']);
+        }
 
         $data['firstname'] = $request->firstname;
         $data['lastname'] = $request->lastname;
@@ -69,8 +91,33 @@ class AuthController extends Controller
 
         UserAbout::create($data);
 
-        return redirect(route('login'))->with('success', 'Registration success, login to access the app');
+        $mailer = App::call('\App\Http\Controllers\MailController@sendMail', [
+            'email_type' => 'activation',
+            'email' => $request->email
+        ]);
+        
+        if ($mailer == 'success') {
+            return redirect(route('login'))->with('success', 'Registration success, an activation link was sent to your email');
+        } else {
+            return redirect()->back()->with('error','Error sending account activation email.');
+        }
+        
     }    
+
+    function activation($id) {
+        $user = User::where('id', $id)->first();
+        $now = new DateTime();
+        $now->format('Y-m-d H:i:s');   
+        
+        if($user) {
+            $user->email_verified_at = $now;
+            $user->save();
+
+            return redirect(route('login'))->with('success', 'Activation Successful, you may now login');
+        } 
+
+        return redirect(route('login'))->with('success', 'Error, unable to activate your account');
+    }
 
     function logout() {
         Session::flush();

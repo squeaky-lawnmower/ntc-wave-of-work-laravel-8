@@ -190,3 +190,24 @@ table, th, td {
     position: fixed;
     margin-left: 25%;
 }
+
+.account-selection {
+    text-align: center;
+    font-family: "Calibri", Tahoma, sans-serif;
+    padding-top: 15%;
+    padding-bottom: 25%;
+}
+
+.jobseeker {
+    background-color: #065368;
+    border-radius: 10px;
+    padding: 20% 10px 20% 10px;
+    color: #FFFFFF;
+}
+
+.employer {
+    border: 1px solid #D3D3D3;
+    border-radius: 10px;
+    padding: 20% 10px 20% 10px;
+    background-color: #FFFFFF;
+}
