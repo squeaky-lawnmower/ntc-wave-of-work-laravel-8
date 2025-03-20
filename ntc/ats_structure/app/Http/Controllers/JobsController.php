@@ -180,7 +180,7 @@ class JobsController extends Controller
         return redirect(route('jobs.index', ['id'=> $id]))->with('success', $message.' Successfully'); 
     }
 
-    function bubble($id) {
+    function bubble($id, $jobIds = null) {
         if($id == null || $id != auth()->user()->id) {
             $id = auth()->user()->id;
             return redirect(route("home"))->with('error','Access Denied.');
@@ -190,13 +190,18 @@ class JobsController extends Controller
             return redirect(route('login'));
         }
 
-        $condition = [
-            'status' => 'open'
-        ];
-        $jobs = Jobs::with('creator')->where($condition)->orderByDesc('created_at')->get();
+        $jobs = Jobs::with('creator');
+        $jobs->where('status', 'open');
+
+        if(!is_null($jobIds)) {
+            $jobs->whereIn('id', explode(',',$jobIds));    
+        }
+
+        $jobs->orderByDesc('created_at');
+        $joblist = $jobs->get();
         
         $data = [
-            'jobs' => $jobs
+            'jobs' => $joblist
         ];
 
         return view("jobs.listing.bubbles")->with($data);

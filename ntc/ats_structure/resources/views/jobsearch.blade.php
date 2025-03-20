@@ -16,11 +16,22 @@
     </div>
 </div>
 
+@php $ids = []; $jobIds = ''; @endphp
+@if(isset($jobs) && !empty($jobs))
+    @foreach($jobs as $job)
+        @php $ids[] = $job->id; @endphp
+    @endforeach
+
+    @php
+        $jobIds = implode(',', $ids);
+    @endphp
+@endif
+
 <div class="mt-2"><h3>&nbsp;</h3></div>
 <div style="width:90%; height:800px;" class="card-container-no-shadow ms-auto me-auto mt-10 mb-10">
     <div class="row">
         <div class="col-4">
-            <iframe width="100%" height="700px" src="{{ route('jobs.bubble.listing', ['id' => auth()->user()->id]) }}" title="Iframe Example"></iframe>
+            <iframe width="100%" height="700px" src="{{ route('jobs.bubble.listing', ['id' => auth()->user()->id, 'jobIds' => $jobIds]) }}" title="Iframe Example"></iframe>
         </div>
         <div class="col-8">
             <iframe width="100%" height="700px"   name="frame_job_details" ></iframe>

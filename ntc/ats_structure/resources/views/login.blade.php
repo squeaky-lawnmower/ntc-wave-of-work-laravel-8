@@ -11,23 +11,14 @@
                 <p>Log-in to your account to use all features.</p>
             </div>
             <div class="mt-1 mb-3">
-            <label class="form-label">Email address</label>
-                <input type="email" class="form-control" name="email">
-                @if($errors->has('email'))
-                    <div class="text-danger">{{ $errors->first('email') }}</div>
-                @endif
+                <x-form.input type="email" name="email" value="{{ old('email')}}" />
             </div>
             <div class="mb-3">
-            <label class="form-label">Password</label>
-                <input type="password" class="form-control" name="password">
-                @if($errors->has('password'))
-                    <div class="text-danger">{{ $errors->first('password') }}</div>
-                @endif
+                <x-form.input type="password" name="password" value="{{ old('password')}}" />
             </div>
             <div class="col-12  col-sm-12 col-md-12 mt-2 mb-10 text-end">
                 <p><a class="anchor-italic" href="{{ route('forgotpass') }}">Forgot Password?</a></p>
             </div>
-
             <button type="submit" class="btn btn-primary full-width">Log In</button>
 
         </form>

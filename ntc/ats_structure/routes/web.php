@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\JobsController;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MessagesController;
 use App\Http\Controllers\JobApplicationsController;
@@ -34,6 +35,8 @@ Route::prefix('password')->group(function() {
 
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::post('/search', [SearchController::class, 'search'])->name('search');
+    Route::get('/search', [SearchController::class, 'searchGet'])->name('search.get');
     
     //profile related routes
     Route::prefix('messages')->group(function() {
@@ -102,7 +105,7 @@ Route::group(['middleware' => 'auth'], function() {
         //view
         Route::get('/listing/{id}/view/{jobId?}', [JobsController::class, 'view'])->name('jobs.view.listing');
         Route::get('/listing/{jobId}/details', [JobsController::class, 'details'])->name('jobs.details.listing');
-        Route::get('/listing/{id}/bubble', [JobsController::class, 'bubble'])->name('jobs.bubble.listing');
+        Route::get('/listing/{id}/bubble/{jobIds?}', [JobsController::class, 'bubble'])->name('jobs.bubble.listing');
         //applications
         Route::get('/applications/{id}', [JobApplicationsController::class, 'show'])->name('jobs.index.applications');
         Route::get('/applications/{jobId}/apply', [JobApplicationsController::class, 'save'])->name('jobs.save.applications');

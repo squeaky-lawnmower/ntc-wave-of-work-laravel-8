@@ -15,7 +15,8 @@
       </div>
       <div class="col-3 col-sm-3 col-md-3 me-auto ms-auto ">
         @auth
-          <form class="col-md-12 text-center me-auto ms-auto" role="search">
+          <form class="col-md-12 text-center me-auto ms-auto" action="{{route('search')}}" method="POST">
+            @csrf
             <div class="input-group">
               @if('employer' === auth()->user()->account_type)
                 @php
@@ -26,8 +27,8 @@
                   $placeholder = "Job Title, Keyword, Company..."
                 @endphp
               @endif
-              <input type="text" class="form-control" placeholder="{{$placeholder}}" aria-label="Search" aria-describedby="find_job">
-                <button class="btn btn-primary" type="button" id="find_job">Search</button>
+              <input type="text" name="searchbar" class="form-control" value="{{old('searchbar')}}" placeholder="{{$placeholder}}">
+              <button class="btn btn-primary">Search</button>
             </div>
           </form>
           @endauth

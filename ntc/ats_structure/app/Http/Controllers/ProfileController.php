@@ -99,6 +99,7 @@ class ProfileController extends Controller
         $profile->firstname = $request->firstname;
         $profile->lastname = $request->lastname;
         $profile->address = $request->address;
+        $profile->birthdate = $request->birthdate;
         $profile->country = $request->country;
         $profile->state = $request->state;
         $profile->city = $request->city;

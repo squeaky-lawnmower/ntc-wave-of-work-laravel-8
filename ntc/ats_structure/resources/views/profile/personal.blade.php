@@ -92,7 +92,7 @@
                         </div>
                         <div class="col-6  col-sm-6 col-md-6">
                             <label class="form-label">Birthdate</label>
-                            <input type="text" class="form-control" name="birthdate"  value="">
+                            <input type="date" class="form-control" name="birthdate"  value="{{auth()->user()->birthdate}}">
                         </div>
                     </div>              
                     <div class="row mt-2">
