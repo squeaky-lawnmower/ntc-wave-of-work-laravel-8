@@ -6,6 +6,7 @@ use App\Models\Jobs;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\App;
 
 class SearchController extends Controller
 {
@@ -34,6 +35,15 @@ class SearchController extends Controller
             ];
 
             return view("dashboard")->with($data);
+        }
+
+        if('employer' == auth()->user()->account_type) {
+
+            if (is_null($request->searchbar)) {
+                $request->searchbar = 'list_all';
+            }            
+            return redirect(route('candidates', ['search' => $request->searchbar]));
+            
         }
 
         return redirect()->route("home");

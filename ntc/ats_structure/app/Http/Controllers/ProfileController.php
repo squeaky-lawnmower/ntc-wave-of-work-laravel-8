@@ -325,6 +325,63 @@ class ProfileController extends Controller
         return redirect(route('profile.edit.skill', ['id'=> $id]))->with('success', 'Deleted Successfully');     
     }
 
+    function candidates($search) {
+
+        if(!Auth::check()) {
+            return redirect(route('login'));
+        }
+
+        $candidates = [];
+        if('list_all' == $search) {
+            $users = User::where('account_type', '=', 'jobseeker')->get();
+            if(!is_null($users)) {
+                foreach($users as $user) {
+                    $candidates[] = $user->id;
+                }
+            }      
+        } else {
+            $users = User::whereRaw("CONCAT(firstname, ' ', lastname) like '%".$search. "%'")
+            ->whereRaw("account_type= 'jobseeker'")->get();
+
+            if(!is_null($users)) {
+                foreach($users as $user) {
+                    $candidates[] = $user->id;
+                }
+            }      
+            
+            $users = User::where(function ($query) use ($search) {
+                $query->where('firstname', 'like', '%'.$search.'%')
+                ->orWhere('lastname', 'like', '%'.$search.'%')
+                ->orWhere('middlename', 'like', '%'.$search.'%');
+            })->where('account_type','=','jobseeker')->get();
+
+            if(!is_null($users)) {
+                foreach($users as $user) {
+                    $candidates[] = $user->id;
+                }
+            }        
+
+            $usersExperience = UserExperience::where('position', 'like', '%'.$search.'%')
+            ->orWhere('description', 'like', '%'.$search.'%')->get();
+
+            if(!is_null($usersExperience)) {
+                foreach($usersExperience as $user) {
+                    $candidates[] = $user->id;
+                }
+            }
+        }
+
+        $ids = array_unique($candidates);
+
+        $candidates = User::whereIn('id', $ids)->get();
+
+        $data = [
+            'candidates' => $candidates
+        ];
+
+        return view("profile.candidates")->with($data);
+    }
+
 }
 
 

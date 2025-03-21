@@ -27,7 +27,7 @@
                   $placeholder = "Job Title, Keyword, Company..."
                 @endphp
               @endif
-              <input type="text" name="searchbar" class="form-control" value="{{old('searchbar')}}" placeholder="{{$placeholder}}">
+              <input type="text" name="searchbar" class="form-control" value="{{request()->get('search')}}" placeholder="{{$placeholder}}">
               <button class="btn btn-primary">Search</button>
             </div>
           </form>

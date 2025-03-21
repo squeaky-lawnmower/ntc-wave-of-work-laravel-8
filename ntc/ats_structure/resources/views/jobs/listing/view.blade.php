@@ -74,7 +74,7 @@
                                                             <td class="text-start">
                                                                 <form action="{{route('messages.start', ['id' => $application->applicants->id])}}" method="POST">
                                                                     @csrf
-                                                                    <button class="btn btn-primary"><i class="fa fa-ban">&nbsp;&nbsp;</i>Message</button>
+                                                                    <button class="btn btn-primary"><i class="fa fa-envelope">&nbsp;&nbsp;</i>Message</button>
                                                                 </form>
                                                     
                                                             </td>
