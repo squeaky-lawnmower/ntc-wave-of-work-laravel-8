@@ -13,7 +13,7 @@
     <div class="card-container ms-auto me-auto mt-10 mb-10 col-sm-6">
         <div class="row">
             <div class="col-1 col-sm-1 col-md-1">
-                <h3><a href="/profile" class="anchor-regular"><i class="fa fa-angle-left">&nbsp;&nbsp;</i></a></h3>
+                <h3><a href="{{ route('profile', ['id' => auth()->user()->id])}}" class="anchor-regular"><i class="fa fa-angle-left">&nbsp;&nbsp;</i></a></h3>
             </div>
             <div class="col-11 col-sm-11 col-md-11">
                 <span>

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\JobsController;
+use App\Http\Controllers\ListController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ProfileController;
@@ -114,4 +115,8 @@ Route::group(['middleware' => 'auth'], function() {
         Route::put('/applications/{jobApplicationId}/update', [JobApplicationsController::class, 'updatePost'])->name('jobs.update.applications.post');
     });
 
+    Route::prefix('list')->group(function() {
+        Route::get('/states/{country_code}', [ListController::class, 'listStates'])->name('list.states');
+        Route::get('/cities/{province_code}', [ListController::class, 'listCities'])->name('list.cities');
+    });
 });

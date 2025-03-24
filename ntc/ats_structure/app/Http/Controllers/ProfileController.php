@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Jobs;
 use App\Models\User;
+use App\Models\Country;
 use App\Models\UserAbout;
 use App\Models\UserSkill;
+use Illuminate\Http\Request;
+
 use App\Models\UserEducation;
 use App\Models\UserExperience;
-use App\Models\Jobs;
-
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -40,6 +41,7 @@ class ProfileController extends Controller
         $education = UserEducation::where('user_id', $id)->orderByDesc('end_year')->get();
         $skills = UserSkill::where('user_id', $id)->get();
         $jobs = Jobs::where('creator_id', $id)->orderByDesc('created_at')->get();
+        $countries = Country::all();
 
         if ($profile == null) {
             return redirect(route("home"))->with('error','Profile not found.');
@@ -53,6 +55,7 @@ class ProfileController extends Controller
             'education' => $education,
             'skills' => $skills,
             'jobs' => $jobs,
+            'countries' => $countries,
             'canEditProfile' => $canEditProfile
         ];
 
@@ -70,12 +73,17 @@ class ProfileController extends Controller
         }
 
         $profile = User::where('id', $id)->first();
+        $countries = Country::all();
 
         if ($profile == null) {
             return redirect(route("home"))->with('error','Profile not found.');
         }
 
-        return view("profile.personal", ['id', $id])->with('id', $id);
+        $data = [
+            'id' => $id,
+            'countries' => $countries
+        ];
+        return view("profile.personal", ['id', $id])->with($data);
     }
 
     function personalPost(Request $request, $id) {
@@ -93,13 +101,15 @@ class ProfileController extends Controller
         $request->validate([
             'firstname' => 'required',
             'lastname' => 'required',
-            "resume_filename" => 'sometimes|mimes:pdf|max:10000'
+            'email' => 'required|email|unique:ats_user',
+            'resume_filename' => 'sometimes|mimes:pdf|max:10000'
         ]);
 
         $profile->firstname = $request->firstname;
         $profile->lastname = $request->lastname;
         $profile->address = $request->address;
         $profile->birthdate = $request->birthdate;
+        $profile->company = $request->company;
         $profile->country = $request->country;
         $profile->state = $request->state;
         $profile->city = $request->city;

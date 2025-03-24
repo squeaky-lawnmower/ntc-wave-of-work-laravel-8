@@ -26,3 +26,74 @@ function selectFirstMessage() {
     firstEntry.click();
     firstEntry.focus();
 }
+
+jQuery(document).ready(function ($) {
+    routeName = document.getElementsByName("route_states")[0].value;
+    selected = document.getElementsByName("selected_state")[0].value;
+
+    updateStateList(routeName, selected);
+
+    setTimeout(function () {
+        routeName = document.getElementsByName("route_cities")[0].value;
+        selected = document.getElementsByName("selected_city")[0].value;
+
+        updateCityList(routeName, selected);
+    }, 500);
+});
+
+async function updateStateList(routeName, selectedState) {
+    countryCode = document.getElementsByName("country")[0].value;
+    provinceElement = document.getElementsByName("state")[0];
+
+    var url = routeName.replace("country_code", countryCode);
+
+    try {
+        let response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error("Unable to fetch province data");
+        }
+
+        const provinces = await response.json();
+
+        provinces.forEach((province) => {
+            var opt = document.createElement("option");
+            opt.value = province.province_code;
+            opt.innerHTML = province.province_name;
+            if (province.province_code === selectedState) {
+                opt.selected = true;
+            } else {
+                opt.selected = false;
+            }
+            provinceElement.appendChild(opt);
+        });
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+async function updateCityList(routeName, selectedCity) {
+    provinceCode = document.getElementsByName("state")[0].value;
+    cityElement = document.getElementsByName("city")[0];
+
+    var url = routeName.replace("province_code", provinceCode);
+
+    try {
+        let response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error("Unable to fetch city data");
+        }
+
+        const cities = await response.json();
+
+        cities.forEach((city) => {
+            var opt = document.createElement("option");
+            opt.value = city.city_code;
+            opt.innerHTML = city.city_name;
+            cityElement.appendChild(opt);
+        });
+    } catch (err) {
+        console.log(err);
+    }
+}
