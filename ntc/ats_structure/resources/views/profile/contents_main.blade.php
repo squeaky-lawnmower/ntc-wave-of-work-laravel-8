@@ -21,8 +21,19 @@
         @endif
     </div>
     <div class="col-3 col-sm-3 col-md-3 text-end mt-3">
+        @php
+            if(auth()->user()->profile_photo) {
+                $profile_photo = 'storage/photos/'.str_replace('public/photos/', '', auth()->user()->profile_photo);
+            } else {
+                $profile_photo = 'images/user_profile.png';
+            }
+        @endphp
         <div class="row">
-            <div class="profile-picture" style="background-image : url({{ asset('images/user_profile.png') }})"></div>
+            <div class="profile-picture" style="background-image : url({{ asset($profile_photo) }})">
+                @if($canEditProfile) 
+                    <a href="{{route('upload.photo')}}"><div class="edit-profile-picture"><i class="fa fa-pencil edit-profile-picture-icon"></i></div></a>
+                @endif
+            </div>
         </div>
     </div>
     

@@ -66,6 +66,8 @@ Route::group(['middleware' => 'auth'], function() {
         //index
         Route::get('/{id}', [ProfileController::class, 'show'])->name('profile');
         Route::get('/candidates/{search}', [ProfileController::class, 'candidates'])->name('candidates');
+        Route::get('/upload/photo/', [ProfileController::class, 'uploadPhoto'])->name('upload.photo');
+        Route::post('/upload/photo/{id}', [ProfileController::class, 'uploadPhotoPost'])->name('upload.photo.post');
         
         //personal section
         Route::get('/personal/{id}/edit', [ProfileController::class, 'personal'])->name('profile.edit.personal');
@@ -119,4 +121,5 @@ Route::group(['middleware' => 'auth'], function() {
         Route::get('/states/{country_code}', [ListController::class, 'listStates'])->name('list.states');
         Route::get('/cities/{province_code}', [ListController::class, 'listCities'])->name('list.cities');
     });
+
 });

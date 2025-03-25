@@ -29,6 +29,7 @@ return new class extends Migration
             $table->string('zipcode')->nullable();
             $table->string('phone')->nullable();
             $table->string('resume_filename')->nullable();
+            $table->string('profile_photo')->default('user_profile.png');
             $table->rememberToken('remember_token');
             $table->timestamp('created_at');
             $table->timestamp('updated_at');

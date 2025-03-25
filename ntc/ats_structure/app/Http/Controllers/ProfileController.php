@@ -392,6 +392,32 @@ class ProfileController extends Controller
         return view("profile.candidates")->with($data);
     }
 
+    function uploadPhoto() {
+        if(!Auth::check()) {
+            return redirect(route('login'));
+        }
+
+        return view('profile.upload_photo');
+    }
+
+    function uploadPhotoPost(Request $request, $id) {
+        $profile = User::where('id', $id)->first();
+        
+        $request->validate([
+            'profile_photo' => 'sometimes|mimes:jpeg,jpg,png|max:10000'
+        ]);
+
+        $profile->profile_photo = $request->profile_photo;
+
+        if($request->hasFile('profile_photo')) {
+            File::delete(asset('storage/photos/'.$profile->profile_photo));
+            $profile->profile_photo = $request->file('profile_photo')->store('public/photos');
+        }
+        
+        $profile->save();
+
+        return redirect(route('upload.photo'))->with('success', 'Profile photo uploaded successfully');
+    }
 }
 
 
