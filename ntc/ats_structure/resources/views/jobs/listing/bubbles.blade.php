@@ -19,21 +19,18 @@
         <div class="row">
             @foreach($jobs as $job)
                 <div class="row">
-                    <div class="col-12 col-sm-12 col-md-12">
                             @php
                               $iframeRoute = "/jobs/listing/".$job->id."/details";
                             @endphp
                             <button class="btn job-card" onclick="showJobDetails('{{ $iframeRoute }}')">
-                                <h5 class="text-darkbluegreen">{{ ucwords($job->job_title) }} ({{ ucwords($job->job_code) }})</h5>
-                                <p>
+                                <p class="p-m">{{ ucwords($job->job_title) }} ({{ ucwords($job->job_code) }})</p>
+                                <p class="p-xs">
                                   @php echo ucwords($job->creator->company); @endphp<br />
                                 </p>
-                                <p><span class="job-tag mb-4">{{ str_replace('_', '-', ucwords($job->contract_type))}}</span></p>
+                                <p><span class="job-tag job-tag-responsive">{{ str_replace('_', '-', ucwords($job->contract_type))}}</span></p>
                             </button>
-                    </div>
                 </div>       
             @endforeach
-        </div>       
     </div>
     <div class="mt-8"><h3>&nbsp;</h3></div>
   </body>

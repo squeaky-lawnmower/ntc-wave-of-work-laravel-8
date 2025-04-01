@@ -45,31 +45,31 @@
                     <div class="row mt-3">
                         <div class="col-4 col-sm-4 col-md-4">
                             <div class="mb-3 ">
-                                <x-form.input type="text" name="job_code" value="{{$job ? $job->job_code : ''}}" />
+                                <x-form.input type="text" name="job_code" value="{{$job ? $job->job_code : old('job_code')}}" />
                             </div>
                         </div>
                         <div class="col-8 col-sm-8 col-md-8">
                             <div class="mb-3 ">
-                                <x-form.input type="text" name="job_title" value="{{$job ? $job->job_title : ''}}" />
+                                <x-form.input type="text" name="job_title" value="{{$job ? $job->job_title : old('job_title')}}" />
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12 col-sm-12 col-md-12">
                             <div class="mb-3 ">
-                                <x-form.textarea name="job_description" value="{{$job ? $job->job_description : ''}}" rows=5 />
+                                <x-form.textarea name="job_description" value="{{$job ? $job->job_description : old('job_description')}}" rows=5 />
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-6 col-sm-6 col-md-6">
                             <div class="mb-3 ">
-                                <x-form.input type="date" value="{{$job ? $job->hiring_start_date : ''}}" name="hiring_start_date" />
+                                <x-form.input type="date" value="{{$job ? $job->hiring_start_date : old('hiring_start_date')}}" name="hiring_start_date" />
                             </div>
                         </div>
                         <div class="col-6 col-sm-6 col-md-6">
                             <div class="mb-3 ">
-                                <x-form.input type="date" value="{{$job ? $job->hiring_end_date : ''}}" name="hiring_end_date" />
+                                <x-form.input type="date" value="{{$job ? $job->hiring_end_date : old('hiring_end_date')}}" name="hiring_end_date" />
                             </div>
                         </div>
                     </div>
@@ -85,7 +85,7 @@
                                 
                             @endphp
                             <div class="mb-3 ">
-                                <x-form.select value="{{$job ? $job->status : ''}}" name="status" options={{$options}}/>
+                                <x-form.select value="{{$job ? $job->status : old('status')}}" name="status" options={{$options}}/>
                             </div>
                         </div>
                         <div class="col-6 col-sm-6 col-md-6">
@@ -99,7 +99,7 @@
                                 
                             @endphp
                             <div class="mb-3 ">
-                                <x-form.select value="{{$job ? $job->contract_type : ''}}" name="contract_type" options={{$options}}/>
+                                <x-form.select value="{{$job ? $job->contract_type : old('contract_type')}}" name="contract_type" options={{$options}}/>
                             </div>
                         </div>
                     </div>

@@ -82,7 +82,7 @@ table, th, td {
 }
 
 .body-contents-container {
-    height: 700px !important; 
+    height: 450px !important; 
     display:block;
 }
 
@@ -95,7 +95,7 @@ table, th, td {
     border : 1px solid #D3D3D3;
     border-radius : 10px;
     background : #FFFFFF;
-    margin : 10px 20px 0;
+    margin : 10px 12px 0;
     padding : 10px;
     width : 100%;    
 }
@@ -119,6 +119,23 @@ table, th, td {
     border-radius : 10px;
     color : #FFFFFF;
     font-weight : bold;
+}
+
+@media (max-width: 576px) {
+    .job-tag-responsive {
+        padding : 2px;
+        margin-right: auto;
+    }    
+
+    .p-xs {
+        font-size: x-small;
+    }    
+
+    .p-m {
+        font-size: medium;
+        font-weight: 500;
+        text-decoration-color: #065368;
+    }
 }
 
 .profile-picture {
@@ -234,4 +251,27 @@ table, th, td {
 .edit-profile-picture-icon {
     vertical-align: baseline;
     margin : 25%;
+}
+
+/* Responsive button styles */
+.btn-responsive {
+    width: 100%; /* Full width on smaller screens */
+    font-size: 62%; /* Adjust font size for smaller screens */
+    padding: 10px; /* Adjust padding for smaller screens */
+    margin-bottom: 10px; /* Add spacing between stacked buttons */
+}
+
+.form-responsive {
+    width: 320px; /* Fixed width for smaller screens */
+}
+
+@media (min-width: 768px) {
+    .btn-responsive {
+        width: auto; /* Default width on larger screens */
+        margin-bottom: 0; /* Remove spacing between buttons */
+    }
+
+    .form-responsive {
+        width: 520px; /* Default width on larger screens */   
+    }
 }

@@ -5,22 +5,22 @@
     <div class="mt-2"><h3>&nbsp;</h3></div>
 
     <div><p>&nbsp;</p></div>
-    <div class="card-container ms-auto me-auto mt-10 mb-10 col-sm-6">
+    <div class="card-container ms-auto me-auto mt-10 mb-10" style="max-width: 90%;">
         <div class="row">
             <div class="col-12">
                 <div class="row">
-                    <div class="col-sm-8">
+                    <div class="col-12 col-md-8 mb-3 mb-md-0">
                         <h4 class="text-center">MY JOB LISTINGS</h4>
                     </div>
-                    <div class="col-sm-4">
-                        <h4 class="text-center"><a href="{{ route('jobs.edit.listing', ['id' => auth()->user()->id])}}" class="btn btn-primary"><i class="fa fa-plus">&nbsp;&nbsp;</i>Create new Job</a></h4>
+                    <div class="col-12 col-md-4 text-center">
+                        <h4><a href="{{ route('jobs.edit.listing', ['id' => auth()->user()->id])}}" class="btn btn-primary"><i class="fa fa-plus">&nbsp;&nbsp;</i>Create new Job</a></h4>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-12">
                     <div class="row">
-                        <table class="table text-center">
+                        <table class="table table-responsive text-center">
                             <thead class="">
                                 <tr>
                                 <th scope="col">Job Code</th>
@@ -41,11 +41,11 @@
                                         <td><a href="#" class="anchor-regular">{{$job->job_title}}</a></td>
                                         <td><span class='fw-bold text-success'>{{strtoupper($job->status)}}</span></td>
                                         <td>
-                                            <a class='btn btn-success' href="{{ route('jobs.edit.listing', ['id' => auth()->user()->id , 'jobId'=> $job->id]) }}">
+                                            <a class='btn btn-success btn-responsive' href="{{ route('jobs.edit.listing', ['id' => auth()->user()->id , 'jobId'=> $job->id]) }}">
                                                 <i class="fa fa-pencil">&nbsp;&nbsp;</i>Edit
                                             </a>
                                         
-                                            <a class="btn btn-primary" href="{{route('jobs.view.listing', ['id' => auth()->user()->id, 'jobId' => $job->id ])}}">
+                                            <a class="btn btn-primary btn-responsive" href="{{route('jobs.view.listing', ['id' => auth()->user()->id, 'jobId' => $job->id ])}}">
                                                 <i class="fa fa-eye">&nbsp;&nbsp;</i>View Details
                                             </a>
                                         </td>
@@ -53,7 +53,7 @@
                                     @endforeach
                                 @endif
                             </tbody>
-                            </table>
+                        </table>
                     </div>
                 </div>
             </div>

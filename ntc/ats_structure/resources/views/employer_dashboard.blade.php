@@ -7,6 +7,7 @@
         </div>
     </div>
 </div-->
+<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
 <div><p>&nbsp;</p></div>
 <div class="card-container ms-auto me-auto mt-10 mb-10 col-sm-6">
@@ -48,7 +49,7 @@
                                     <td><a href="#" class="anchor-regular">{{$job->job_title}}</a></td>
                                     <td><span class='fw-bold text-success'>{{strtoupper($job->status)}}</span></td>
                                     <td>
-                                        <a class="btn btn-primary" href="{{route('jobs.view.listing', ['id' => auth()->user()->id, 'jobId' => $job->id ])}}"><i class="fa fa-eye">&nbsp;&nbsp;</i>View Details</a>
+                                        <a class="btn btn-primary btn-responsive" href="{{route('jobs.view.listing', ['id' => auth()->user()->id, 'jobId' => $job->id ])}}"><i class="fa fa-eye">&nbsp;&nbsp;</i>View Details</a>
                                     </td>
                                 </tr>
                                 @endforeach
