@@ -20,7 +20,7 @@
 
         <!-- Collapsible Content -->
         <div class="collapse navbar-collapse" id="navbarText">
-            <div class="d-flex flex-lg-row w-100">
+            <div class="d-flex flex-lg-row w-100 navbar-responsive">
                 <!-- Search Form -->
                 @auth
                     <form class="d-flex flex-column flex-lg-row align-items-center my-3 my-lg-0 form-responsive" action="{{ route('search') }}" method="POST">

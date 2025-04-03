@@ -67,7 +67,7 @@
                         </div>
                     </form>
                 </div>
-                <div class="col-sm-1 col-md-1 col-1">
+                <div class="col-sm-1 col-md-1 col-1 row-responsive-padding">
                     <form action="{{route('profile.delete.education.post', ['id' => auth()->user()->id, 'educId' => $educ->id])}}" method="POST">
                         @csrf
                         @method('DELETE')

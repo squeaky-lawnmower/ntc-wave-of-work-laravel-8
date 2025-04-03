@@ -262,7 +262,20 @@ table, th, td {
 }
 
 .form-responsive {
-    width: 320px; /* Fixed width for smaller screens */
+    width: 360px; /* Fixed width for smaller screens */
+}
+
+.navbar-responsive {
+    display: contents; /* Default to block layout on smaller screens */
+    flex-direction: column; /* Stack items vertically */
+}
+
+.row-responsive {
+    margin-right: 0%; /* Remove right margin on smaller screens */
+}
+
+.row-responsive-padding {
+    padding-left: 0%; /* Remove left padding on smaller screens */
 }
 
 @media (min-width: 768px) {
@@ -273,5 +286,10 @@ table, th, td {
 
     .form-responsive {
         width: 520px; /* Default width on larger screens */   
+    }
+
+    .navbar-responsive {
+        display: flex; /* Flexbox for larger screens */
+        justify-content: space-between; /* Space between items */
     }
 }

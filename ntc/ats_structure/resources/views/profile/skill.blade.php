@@ -21,7 +21,7 @@
                         <div class="col-sm-11 col-md-11 col-11 ">
                             <x-form.input type="text" name="skill" value=""/>
                         </div>
-                        <div class="col-1 col-sm-1 col-md-1 mt-auto">
+                        <div class="col-1 col-sm-1 col-md-1 mt-auto row-responsive-padding">
                             <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i></button>
                         </div>
                     </div>
@@ -40,7 +40,7 @@
                             <div class="col-11 mt-auto mb-auto">            
                                     <h6>{{$skill->skill_name}}</h6>
                             </div>
-                            <div class="col-1  col-sm-1 col-md-1 mb-auto mt-auto">
+                            <div class="col-1  col-sm-1 col-md-1 mb-auto mt-auto row-responsive-padding">
                                 <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
                             </div>
                         </div>
