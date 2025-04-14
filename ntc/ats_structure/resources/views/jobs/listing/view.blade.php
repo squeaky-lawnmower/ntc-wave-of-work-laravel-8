@@ -27,9 +27,13 @@
                                     </p>
                                 </div>
                                 <hr />
-                                <h6>Job Details</h6>        
+                                <h6>Job Description</h6>        
                                 <p>
                                     {{$job->job_description}}
+                                </p>  
+                                <h6>Job Tasks</h6>        
+                                <p>
+                                    {{$job->job_tasks}}
                                 </p>  
                                 @if($canViewApplicants)
                                     <hr />     

@@ -141,6 +141,7 @@ class JobsController extends Controller
             'job_code' => 'required',
             'job_title' => 'required',
             'job_description' => 'required',
+            'job_tasks' => 'required',
             'hiring_start_date' => 'required',
             'hiring_end_date' => 'required',
             'contract_type' => 'required',
@@ -154,6 +155,7 @@ class JobsController extends Controller
             $job->job_code = $request->job_code;
             $job->job_title = $request->job_title;
             $job->job_description = $request->job_description;
+            $job->job_tasks = $request->job_tasks;
             $job->hiring_start_date = $request->hiring_start_date;
             $job->hiring_end_date = $request->hiring_end_date;
             $job->status = $request->status;
@@ -165,6 +167,7 @@ class JobsController extends Controller
             $data['job_code'] = $request->job_code;
             $data['job_title'] = $request->job_title;
             $data['job_description'] = $request->job_description;
+            $data['job_tasks'] = $request->job_tasks;
             $data['hiring_start_date'] = $request->hiring_start_date;
             $data['hiring_end_date'] = $request->hiring_end_date;
             $data['status'] = $request->status;

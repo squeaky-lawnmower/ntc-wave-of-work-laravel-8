@@ -9,14 +9,18 @@ use App\Http\Controllers\ListController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SupportController;
 use App\Http\Controllers\MessagesController;
 use App\Http\Controllers\JobApplicationsController;
 
 Route::get('/', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'loginPost'])->name('login.post');
 Route::post('/sendMail/{email_type?}/{email?}', [MailController::class, 'sendMail'])->name('sendMail');
-Route::get('/support', function () {
-    return view('support');
+
+//support related routes
+Route::prefix('support')->group(function() {
+    Route::get('/', [SupportController::class, 'show'])->name('support');
+    Route::post('/',[SupportController::class, 'supportPost'])->name('support.post');
 });
 
 //registration related routes

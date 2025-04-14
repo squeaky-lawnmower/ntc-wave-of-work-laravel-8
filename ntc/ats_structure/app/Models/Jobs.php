@@ -26,6 +26,7 @@ class Jobs extends Model
         'job_code',
         'job_title',
         'job_description',
+        'job_tasks',
         'status',
         'contract_type',
         'hiring_start_date',

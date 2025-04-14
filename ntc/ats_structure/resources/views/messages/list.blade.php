@@ -20,7 +20,7 @@
           @foreach($list as $li)
             
             @php
-              $iframeRoute = "/messages/".$li->id."/exchange/";
+              $iframeRoute = route('messages.exchange', ['id' => $li->id]);
               $buttonId = "messageListButton".$li->id;
             @endphp
 

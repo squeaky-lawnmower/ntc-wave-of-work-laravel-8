@@ -57,7 +57,14 @@
                     <div class="row">
                         <div class="col-12 col-sm-12 col-md-12">
                             <div class="mb-3 ">
-                                <x-form.textarea name="job_description" value="{{$job ? $job->job_description : old('job_description')}}" rows=5 />
+                                <x-form.textarea name="job_description" value="{{$job ? $job->job_description : old('job_description')}}" rows=3 />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12">
+                            <div class="mb-3 ">
+                                <x-form.textarea name="job_tasks" value="{{$job ? $job->job_tasks : old('job_tasks')}}" rows=3 />
                             </div>
                         </div>
                     </div>

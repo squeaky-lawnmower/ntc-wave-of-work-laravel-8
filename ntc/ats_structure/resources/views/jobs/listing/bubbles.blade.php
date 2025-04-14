@@ -20,7 +20,7 @@
             @foreach($jobs as $job)
                 <div class="row">
                             @php
-                              $iframeRoute = "/jobs/listing/".$job->id."/details";
+                              $iframeRoute = route('jobs.details.listing', ['jobId' => $job->id]);
                             @endphp
                             <button class="btn job-card" onclick="showJobDetails('{{ $iframeRoute }}')">
                                 <p class="p-m">{{ ucwords($job->job_title) }} ({{ ucwords($job->job_code) }})</p>

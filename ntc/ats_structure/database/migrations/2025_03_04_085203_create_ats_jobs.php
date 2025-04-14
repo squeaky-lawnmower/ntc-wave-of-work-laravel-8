@@ -20,6 +20,7 @@ class CreateAtsJobs extends Migration
             $table->string('job_code');
             $table->string('job_title');
             $table->longText('job_description');
+            $table->longText('job_tasks');
             $table->enum('status', ['draft', 'open', 'close']);
             $table->enum('contract_type', ['full_time', 'part_time', 'contract_based']);
             $table->date('hiring_start_date');
