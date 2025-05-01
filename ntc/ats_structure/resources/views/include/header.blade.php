@@ -44,7 +44,7 @@
                 <!-- Navigation Links -->
                 <ul class="navbar-nav mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                        <a class="nav-link active" aria-current="page" href="{{route('home')}}">Home</a>
                     </li>
                     @auth
                         <li class="nav-item">
