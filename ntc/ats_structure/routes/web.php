@@ -19,8 +19,8 @@ Route::post('/sendMail/{email_type?}/{email?}', [MailController::class, 'sendMai
 
 //support related routes
 Route::prefix('support')->group(function() {
-    Route::get('/', [SupportController::class, 'show'])->name('support');
-    Route::post('/',[SupportController::class, 'supportPost'])->name('support.post');
+    Route::get('/', [SupportController::class, 'show'])->name('support.page');
+    Route::post('/save',[SupportController::class, 'supportPost'])->name('support.post');
 });
 
 //registration related routes

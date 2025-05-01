@@ -30,7 +30,7 @@
                     sales@ntcm.com.ph
                 <p>
                 <p>
-                    For questions and concerns, <a href="/support" class="anchor-regular text-lightbluegreen">click here</a>
+                    For questions and concerns, <a href="{{ route('support.page') }}" class="anchor-regular text-lightbluegreen">click here</a>
                 </p>
             </div>
         </div>
