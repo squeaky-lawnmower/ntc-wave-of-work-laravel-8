@@ -39,6 +39,9 @@
             <div class="col-12 col-sm-12 col-md-12 text-center">
                 <?php echo date("Y"); ?> © Norwegian Training Center - Manila of the Norwegian Maritime Foundation of the Philippines Inc., All rights reserved.
             </div>
+            <div class="col-12 col-sm-12 col-md-12 text-center">
+                <sub>App Version 1.0.0 Release 2025.05.06.01</sub>
+            </div>
         </div>        
     </footer>
 </div>

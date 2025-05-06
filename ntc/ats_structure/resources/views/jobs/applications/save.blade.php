@@ -35,8 +35,8 @@
                     <button class="btn btn-primary">Submit Application</button>
                 </form>
             @else
-                <p>Please update your profile first. Click
-                <a class="anchor-regular" href="{{ route('profile', ['id' => auth()->user()->id])}}">HERE</a>. </p>
+                <p>Please update your profile first. <span class="text-danger"> <br /><i>(Contact number is required when applying for a position.)</i></span> <br />Click
+                <a class="anchor-regular" href="{{ route('profile', ['id' => auth()->user()->id])}}">HERE</a> to edit your profile.</p>
             @endif
             
         </div>

@@ -101,7 +101,7 @@ class ProfileController extends Controller
         $request->validate([
             'firstname' => 'required',
             'lastname' => 'required',
-            'email' => 'required|email|unique:ats_user',
+            'email' => 'required|email',
             'resume_filename' => 'sometimes|mimes:pdf|max:10000'
         ]);
 

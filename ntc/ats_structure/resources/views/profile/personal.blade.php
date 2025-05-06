@@ -28,7 +28,8 @@
                     </div>
                     <div class="row mt-2">
                         <div class="col-12  col-sm-12 col-md-12">
-                            <x-form.input type="email" name="email" value="{{auth()->user()->email}}" />
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" name="email" value="{{auth()->user()->email}}" readonly=true>
                         </div>
                     </div>
                     <div class="row mt-2">
